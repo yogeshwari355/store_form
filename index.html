@@ -212,5 +212,27 @@ form.addEventListener('submit', function(e){
 });
 </script>
 
+    
+<script>
+/* Enter key -> next input focus */
+document.addEventListener('keydown', function(e){
+    if(e.key === 'Enter'){
+        const form = e.target.form;
+        if(!form) return;
+
+        e.preventDefault();
+
+        const focusable = Array.from(
+            form.querySelectorAll('input, select, textarea, button')
+        ).filter(el => !el.disabled && el.type !== 'hidden');
+
+        const index = focusable.indexOf(e.target);
+        if(index > -1 && index < focusable.length - 1){
+            focusable[index + 1].focus();
+        }
+    }
+});
+</script>
+
 </body>
 </html>
